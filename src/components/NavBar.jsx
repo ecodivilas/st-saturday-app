@@ -1,4 +1,4 @@
-import GiHamburgerMenu from "../icons/icons";
+import { GiHamburgerMenu } from "../icons/Icons";
 
 const NavBar = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
-import { BsLinkedin } from "../Icons/icons";
-import { BsGithub } from "../Icons/icons";
-import { LiaViber } from "../Icons/icons";
+import { BsLinkedin } from "../icons/Icons";
+import { BsGithub } from "../icons/Icons";
+import { LiaViber } from "../icons/Icons";
 // const [name, value] = useState("")
 
 const Cards = () => {
