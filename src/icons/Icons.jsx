@@ -3,4 +3,4 @@ import { BsTwitter } from 'react-icons/bs'
 import { AiFillInstagram } from 'react-icons/ai'
 
 
-export { BiLogoFacebook, BsTwitter , AiFillInstagram}
+export { BiLogoFacebook, BsTwitter, AiFillInstagram }
