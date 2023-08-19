@@ -1,11 +1,13 @@
 import "./App.css";
-import Footer from "./components/Footer";
+import UserFile from "./components/UserFile";
+import Footer from "./components/Footer"
 
 function App() {
   return (
-    <>
+    <div>
+      <UserFile />
       <Footer />
-    </>
+    </div>
   );
 }
 
