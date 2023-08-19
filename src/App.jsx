@@ -1,9 +1,10 @@
 import "./App.css";
+import UserFile from "./UserFile";
 
 function App() {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <UserFile />
     </div>
   );
 }
