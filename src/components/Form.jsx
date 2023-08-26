@@ -11,6 +11,7 @@ const defaultInputValues = {
   birthdate: '',
   type_id: 1,
   student_id: '',
+  pagIbig: '',
 }
 
 let variable = 3
@@ -30,6 +31,7 @@ const Form = ({ handleClickHide }) => {
   const birthdate_value = useRef(null);
   const credit_card_value = useRef(null);
   const student_id_value = useRef(null);
+  const pagIbig_value = useRef(null);
 
   useEffect(() => {
     // console.log(Object.keys(formErrors).length)
@@ -55,6 +57,7 @@ const Form = ({ handleClickHide }) => {
       mobile_number_value.current.value = '';
       birthdate_value.current.value = '';
       student_id_value.current.value = '';
+      pagIbig_value.current.value = '';
     }
   }, [formErrors])
 
@@ -105,11 +108,11 @@ const Form = ({ handleClickHide }) => {
     }
 
     if (formInputs.birthdate === '') {
-      errors.birthdate = "Mobile is required!"
+      errors.birthdate = "Birth Date is required!"
     }
 
     if (formInputs.confirm_password === '') {
-      errors.confirm_password = "Mobile is required!"
+      errors.confirm_password = "Password is required!"
     }
     else if (formInputs.password !== formInputs.confirm_password) {
       errors.confirm_password = "Password doesn't Match!"
@@ -128,6 +131,17 @@ const Form = ({ handleClickHide }) => {
         errors.student_id = "Invalid Student ID!";
       }
     }
+
+    if (formInputs.pagIbig === '') {
+      errors.pagIbig = "Pag-Ibig is required!"
+    }
+    else {
+      const pagIbigRegex = /^[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/;
+      if (!pagIbigRegex.test(formInputs.pagIbig)) {
+        errors.pagIbig = "Invalid Pag-Ibig Format!";
+      }
+    }
+
     return errors
   }
   return (
@@ -176,6 +190,12 @@ const Form = ({ handleClickHide }) => {
             <input ref={student_id_value} onChange={handleOnChange} type="text" name="student_id" id="student_id" className="block py-2.5 px-0 w-full text-sm text-white dark:text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-white-600 peer" style={{ filter: 'invert(1)' }} placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.student_id}</span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Student Number</label>
+          </div>
+
+          <div className="relative z-0 w-full mb-6 group">
+            <input ref={pagIbig_value} onChange={handleOnChange} type="text" name="pagIbig" id="pagIbig" className="block py-2.5 px-0 w-full text-sm text-white dark:text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-white-600 peer peer-focus-visible:before:only:" style={{ filter: 'invert(1)' }} placeholder="1234-5678-9012" />
+            <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.pagIbig}</span>
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pag-Ibig</label>
           </div>
 
           <div className="relative z-0 w-full mb-6 group">
