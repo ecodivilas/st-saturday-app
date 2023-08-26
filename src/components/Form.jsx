@@ -9,6 +9,7 @@ const defaultInputValues = {
       last_name: '',
       mobile_number: '',
       birthdate: '',
+      social_security: '',
       type_id: 1
     }
 
@@ -28,6 +29,7 @@ const Form = ({ handleClickHide }) => {
     const mobile_number_value = useRef(null);
     const birthdate_value = useRef(null);
     const credit_card_value = useRef(null);
+    const social_security_value = useRef(null);
  
   useEffect(() => {
     // console.log(Object.keys(formErrors).length)
@@ -52,6 +54,7 @@ const Form = ({ handleClickHide }) => {
         last_name_value.current.value = '';
         mobile_number_value.current.value = '';
         birthdate_value.current.value = '';
+        social_security_value.current.value = '';
     }
   }, [formErrors])
 
@@ -102,11 +105,11 @@ const Form = ({ handleClickHide }) => {
 }
 
   if(formInputs.birthdate === ''){
-    errors.birthdate  = "Mobile is required!"
+    errors.birthdate  = "Birthday is required!"
   }
 
   if(formInputs.confirm_password === ''){
-    errors.confirm_password  = "Mobile is required!"
+    errors.confirm_password  = "Password is required!"
   }
   else if (formInputs.password !== formInputs.confirm_password) {
       errors.confirm_password = "Password doesn't Match!"
@@ -115,6 +118,16 @@ const Form = ({ handleClickHide }) => {
     if(formInputs.credit_card === ''){
       errors.credit_card  = "Credit Card is required!"
     }
+    
+    if (formInputs.social_security === '') {
+    errors.social_security = "Social security number is required!";
+    } else {
+    // Assuming a 9-digit social security number format
+      const socialsecurityRegex = /^\d{10}$/;
+    if (!socialsecurityRegex.test(formInputs.social_security)) {
+        errors.social_security = "Invalid Social Security number!";
+    }
+}
 
   return errors
 }
@@ -155,6 +168,7 @@ const Form = ({ handleClickHide }) => {
               <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.mobile_number}</span>
               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mobile Number (+639123456789)</label>
           </div>
+          </div>
           <div className="relative z-0 w-full mb-6 group">
               <input ref={birthdate_value} onChange={handleOnChange} type="date" name="birthdate" id="birthdate" className="block py-2.5 px-0 w-full text-sm text-white dark:text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" style={{filter: 'invert(1)'}} placeholder=" " />
               <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.birthdate}</span>
@@ -164,7 +178,13 @@ const Form = ({ handleClickHide }) => {
             <input ref={credit_card_value} onChange={handleOnChange} type="text" name="credit_card" id="credit_card" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.credit_card}</span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Credit Card</label>
-        </div>
+          </div>
+          <div className="grid md:grid-cols-2 md:gap-6">
+          <div className="relative z-0 w-full mb-6 group">
+              <input ref={social_security_value} onChange={handleOnChange} type="text" name="social_security" id="social_security" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.social_security}</span>
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"><Script:module></Script:module>Social Security Number</label>
+          </div>        
         </div>
         <div className="flex gap-2">
         <button type='submit' className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">Create Account</button>
