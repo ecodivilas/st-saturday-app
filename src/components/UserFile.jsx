@@ -1,19 +1,16 @@
-import React from 'react'
+import React from "react";
+import ProfilePicture from "./ProfilePicture";
+import Cards from "./components/Cards";
+import Buttons from "./Buttons";
 
 const UserFile = () => {
-    return (
-        <div className='bg-[#28371A] h-screen w-full'>
-            <h1 className='flex items-center justify-center p-5 font-sans text-white font-bold text-[2rem]'>User Profile</h1>
-            <div className='text-white'>
-                <label htmlFor="">Name:</label>
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className='' />
-            </div>
-        </div>
-    )
-}
+  return (
+    <div>
+      <ProfilePicture />
+      <Cards/>
+      <Buttons />
+    </div>
+  );
+};
 
-export default UserFile
+export default UserFile;
