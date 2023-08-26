@@ -1,23 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {   AiOutlineEyeInvisible,
-  AiOutlineEye, } from '../icons/Icons'
-// import { createUser } from '../services/UserService'
+import {  AiOutlineEye, AiOutlineEyeInvisible } from '../icons/Icons'
 
 const defaultInputValues = {
-  email: '',
-  password: '',
-  confirm_password: '',
-  first_name: '',
-  last_name: '',
-  mobile_number: '',
-  birthdate: '',
-  type_id: 1,
-  student_id: '',
-  social_security: '',
-  pagIbig: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    first_name: '',
+    last_name: '',
+    mobile_number: '',
+    birthdate: '',
+    student_id: '',
+    social_security: '',
+    pagIbig: '',
+    type_id: 1,
 }
 
-    let variable = 3
+  let variable = 3
 
 const Form = ({ handleClickHide }) => {
     const [userInputs, setUserInputs] = useState(defaultInputValues)
@@ -37,7 +35,6 @@ const Form = ({ handleClickHide }) => {
   }
 
 
-
   // Ref is only for input, nothing to do with states
   const email_value = useRef(null);
   const password_value = useRef(null);
@@ -52,7 +49,7 @@ const Form = ({ handleClickHide }) => {
   const pagIbig_value = useRef(null);
 
   useEffect(() => {
-    // console.log(Object.keys(formErrors).length)
+      // console.log(Object.keys(formErrors).length)
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       // createUser(userInputs)
       // .then(res => {
@@ -95,12 +92,13 @@ const Form = ({ handleClickHide }) => {
 
   const validate = (formInputs) => {
     const errors = {}
+
     if(formInputs.email === ''){
         errors.email = "Email is required!"
-    }  else {
-      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; 
+    } else {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
       if (!emailRegex.test(formInputs.email)) {
-          errors.email = "Invalid email Address!";
+          errors.email = "Invalid email Address!"
       }
     }
 
@@ -119,14 +117,11 @@ const Form = ({ handleClickHide }) => {
     if (formInputs.mobile_number === '') {
     errors.mobile_number = "Mobile is required!";
     } else {
-    // Assuming a 10-digit mobile number format
     const mobileRegex = /^[0-9]{10}$/; 
     if (!mobileRegex.test(formInputs.mobile_number)) {
         errors.mobile_number = "Invalid mobile number!";
+      }
     }
-}
-
-  }
 
     if (formInputs.birthdate === '') {
       errors.birthdate = "BirthDate is required!"
@@ -148,10 +143,11 @@ const Form = ({ handleClickHide }) => {
     } else {
     // Assuming a 9-digit social security number format
       const socialsecurityRegex = /^\d{10}$/;
+    
     if (!socialsecurityRegex.test(formInputs.social_security)) {
         errors.social_security = "Invalid Social Security number!";
+      }
     }
-  }
     
     if (formInputs.student_id === '') {
       errors.student_id = "Student ID is required!"
@@ -165,8 +161,7 @@ const Form = ({ handleClickHide }) => {
     
     if (formInputs.pagIbig === '') {
       errors.pagIbig = "Pag-Ibig is required!"
-    }
-    else {
+    } else {
       const pagIbigRegex = /^[0-9]{4}\-[0-9]{4}\-[0-9]{4}$/;
       if (!pagIbigRegex.test(formInputs.pagIbig)) {
         errors.pagIbig = "Invalid Pag-Ibig Format!";
@@ -239,9 +234,9 @@ const Form = ({ handleClickHide }) => {
           </div>        
         </div>
         <div className="relative z-0 w-full mb-6 group">
-            <input ref={pagIbig_value} onChange={handleOnChange} type="text" name="pagIbig" id="pagIbig" className="block py-2.5 px-0 w-full text-sm text-white dark:text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-white-600 peer peer-focus-visible:before:only:" style={{ filter: 'invert(1)' }} placeholder="1234-5678-9012" />
+            <input ref={pagIbig_value} onChange={handleOnChange} type="text" name="pagIbig" id="pagIbig" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-white-600 peer peer-focus-visible:before:only:" placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.pagIbig}</span>
-            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pag-Ibig</label>
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pag-Ibig e.x. 1234-5678-9012</label>
           </div>
         <div className="flex gap-2">
         <button type='submit' className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">Create Account</button>
