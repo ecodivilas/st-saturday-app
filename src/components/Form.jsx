@@ -112,8 +112,17 @@ const Form = ({ handleClickHide }) => {
       errors.confirm_password = "Password doesn't Match!"
     }
 
+    //VISA CARD VALIDATION 
+    //It should start with 4 and total digit is 16
+    //It should not contain any alphabet or special characters.
+
     if(formInputs.credit_card === ''){
       errors.credit_card  = "Credit Card is required!"
+    } else {
+      const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$/; 
+      if (!creditCardRegex.test(formInputs.credit_card)) {
+          errors.credit_card = "Invalid Credit Card number!";
+      }
     }
 
   return errors
