@@ -12,6 +12,7 @@ const defaultInputValues = {
     student_id: '',
     social_security: '',
     pagIbig: '',
+    ip_address: '',
     type_id: 1,
 }
 
@@ -47,6 +48,7 @@ const Form = ({ handleClickHide }) => {
   const student_id_value = useRef(null);
   const social_security_value = useRef(null);
   const pagIbig_value = useRef(null);
+  const ip_address_value = useRef(null);
 
   useEffect(() => {
       // console.log(Object.keys(formErrors).length)
@@ -74,6 +76,7 @@ const Form = ({ handleClickHide }) => {
       student_id_value.current.value = '';
       social_security_value.current.value = '';
       pagIbig_value.current.value = '';
+      ip_address_value.current.value = '';
     }
   }, [formErrors])
 
@@ -167,6 +170,17 @@ const Form = ({ handleClickHide }) => {
         errors.pagIbig = "Invalid Pag-Ibig Format!";
       }
     }
+
+    if (formInputs.ip_address === "") {
+      errors.ip_address = "IP Address is required!";
+    } else {
+      const ipRegex =
+        /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+      if (!ipRegex.test(formInputs.ip_address)) {
+        errors.ip_address = "Invalid IP Address!";
+      }
+    }
+    
     return errors
   }
 
@@ -237,6 +251,23 @@ const Form = ({ handleClickHide }) => {
             <input ref={pagIbig_value} onChange={handleOnChange} type="text" name="pagIbig" id="pagIbig" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-white-600 peer peer-focus-visible:before:only:" placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.pagIbig}</span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pag-Ibig e.x. 1234-5678-9012</label>
+          </div>
+          <div className="relative z-0 w-full mb-6 group">
+            <input
+              ref={ip_address_value}
+              onChange={handleOnChange}
+              type="text"
+              name="ip_address"
+              id="ip_address"
+              className="text-white block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+            />
+            <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">
+              {formErrors.ip_address}
+            </span>
+            <label className="peer-focus:font-medium absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              IP Address
+            </label>
           </div>
         <div className="flex gap-2">
         <button type='submit' className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">Create Account</button>
