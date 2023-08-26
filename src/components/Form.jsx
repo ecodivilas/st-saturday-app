@@ -9,8 +9,8 @@ const defaultInputValues = {
   last_name: "",
   mobile_number: "",
   birthdate: "",
-  ip_address: "",
   type_id: 1,
+  student_id: "",
 };
 
 let variable = 3;
@@ -29,7 +29,7 @@ const Form = ({ handleClickHide }) => {
   const mobile_number_value = useRef(null);
   const birthdate_value = useRef(null);
   const credit_card_value = useRef(null);
-  const ip_address_value = useRef(null);
+  const student_id_value = useRef(null);
 
   useEffect(() => {
     // console.log(Object.keys(formErrors).length)
@@ -54,7 +54,7 @@ const Form = ({ handleClickHide }) => {
       last_name_value.current.value = "";
       mobile_number_value.current.value = "";
       birthdate_value.current.value = "";
-      ip_address.current.value = "";
+      student_id_value.current.value = "";
     }
   }, [formErrors]);
 
@@ -102,7 +102,6 @@ const Form = ({ handleClickHide }) => {
         errors.ip_address = "Invalid IP Address!";
       }
     }
-
     if (formInputs.mobile_number === "") {
       errors.mobile_number = "Mobile is required!";
     } else {
@@ -125,6 +124,14 @@ const Form = ({ handleClickHide }) => {
 
     if (formInputs.credit_card === "") {
       errors.credit_card = "Credit Card is required!";
+    }
+    if (formInputs.student_id === "") {
+      errors.student_id = "Student ID is required!";
+    } else {
+      const studentIdRegex = /^[a-zA-Z]{2}[0-9]{2}[a-zA-Z]{4}$/;
+      if (!studentIdRegex.test(formInputs.student_id)) {
+        errors.student_id = "Invalid Student ID!";
+      }
     }
 
     return errors;
@@ -257,6 +264,26 @@ const Form = ({ handleClickHide }) => {
             </span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
           </div>
+
+          <div className="relative z-0 w-full mb-6 group">
+            <input
+              ref={student_id_value}
+              onChange={handleOnChange}
+              type="text"
+              name="student_id"
+              id="student_id"
+              className="block py-2.5 px-0 w-full text-sm text-white dark:text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-white-600 peer"
+              style={{ filter: "invert(1)" }}
+              placeholder=" "
+            />
+            <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">
+              {formErrors.student_id}
+            </span>
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              Student Number
+            </label>
+          </div>
+
           <div className="relative z-0 w-full mb-6 group">
             <input
               ref={credit_card_value}
@@ -274,23 +301,24 @@ const Form = ({ handleClickHide }) => {
               Credit Card
             </label>
           </div>
-          <div className="relative z-0 w-full mb-6 group">
-            <input
-              ref={ip_address_value}
-              onChange={handleOnChange}
-              type="text"
-              name="ip_address"
-              id="ip_address"
-              className=" text-white block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-            />
-            <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">
-              {formErrors.ip_address}
-            </span>
-            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-              IP Address
-            </label>
-          </div>
+        </div>
+        <div className="relative z-0 w-full mb-6 group">
+          <input
+            ref={student_id_value}
+            onChange={handleOnChange}
+            type="text"
+            name="student_id"
+            id="student_id"
+            className="block py-2.5 px-0 w-full text-sm text-white dark:text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-white-600 peer"
+            style={{ filter: "invert(1)" }}
+            placeholder=" "
+          />
+          <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">
+            {formErrors.student_id}
+          </span>
+          <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+            Student Number
+          </label>
         </div>
         <div className="flex gap-2">
           <button
