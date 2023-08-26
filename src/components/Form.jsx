@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
+import {   AiOutlineEyeInvisible,
+  AiOutlineEye, } from '../icons/Icons'
 // import { createUser } from '../services/UserService'
 
 const defaultInputValues = {
@@ -18,6 +20,20 @@ const Form = ({ handleClickHide }) => {
     const [userInputs, setUserInputs] = useState(defaultInputValues)
     const [formErrors, setFormErrors] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
+
+
+    const [showPass, setShowPass] = useState(false)
+    const [confirmPass, setConfrimPass] = useState(false)
+
+    const handleShowpassord = () => {
+        setShowPass(!showPass)
+    }
+
+    const handleConfirmPass = () => {
+      setConfrimPass(!confirmPass)
+  }
+
+
 
     // Ref is only for input, nothing to do with states
     const email_value = useRef(null);
@@ -123,35 +139,37 @@ const Form = ({ handleClickHide }) => {
     <div className='absolute top-0 left-0 z-50 flex items-center justify-center w-full h-screen bg-slate-700'>
       <form className="w-5/6 p-4 pt-6 mt-4 rounded shadow-xl bg-slate-900" onSubmit={handleSubmit}>
         <div className="relative z-0 w-full mb-6 group">
-            <input ref={email_value} onChange={handleOnChange} type="text" name="email" id="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <input ref={email_value} onChange={handleOnChange} type="text" name="email" id="email" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.email}</span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
         </div>
         <div className="relative z-0 w-full mb-6 group">
-            <input ref={password_value} onChange={handleOnChange} type="password" name="password" id="password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <input ref={password_value} onChange={handleOnChange} type={ showPass ? "text" : "password" } name="password" id="password" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.password}</span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+            <button className='text-white absolute flex right-0 top-2 justify-end items-end' onClick={handleShowpassord}>{showPass ? (<AiOutlineEye />) : (<AiOutlineEyeInvisible />) }</button>
         </div>
         <div className="relative z-0 w-full mb-6 group">
-            <input ref={confirm_password_value} onChange={handleOnChange} type="password" name="confirm_password" id="confirm_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <input ref={confirm_password_value} onChange={handleOnChange} type={ confirmPass ? "text" : "password" } name="confirm_password" id="confirm_password" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.confirm_password}</span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
+            <button className='text-white absolute flex right-0 top-2 justify-end items-end' onClick={handleConfirmPass}>{showPass ? (<AiOutlineEye />) : (<AiOutlineEyeInvisible />) }</button>
         </div>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 w-full mb-6 group">
-              <input ref={first_name_value} onChange={handleOnChange} type="text" name="first_name" id="first_name" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <input ref={first_name_value} onChange={handleOnChange} type="text" name="first_name" id="first_name" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
               <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.first_name}</span>
               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
           </div>
           <div className="relative z-0 w-full mb-6 group">
-              <input ref={last_name_value} onChange={handleOnChange} type="text" name="last_name" id="last_name" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <input ref={last_name_value} onChange={handleOnChange} type="text" name="last_name" id="last_name" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
               <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.last_name}</span>
               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
           </div>
         </div>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 w-full mb-6 group">
-              <input ref={mobile_number_value} onChange={handleOnChange} type="tel" name="mobile_number" id="mobile_number" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <input ref={mobile_number_value} onChange={handleOnChange} type="tel" name="mobile_number" id="mobile_number" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
               <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.mobile_number}</span>
               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mobile Number (+639123456789)</label>
           </div>
@@ -161,7 +179,7 @@ const Form = ({ handleClickHide }) => {
               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
           </div>
           <div className="relative z-0 w-full mb-6 group">
-            <input ref={credit_card_value} onChange={handleOnChange} type="text" name="credit_card" id="credit_card" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <input ref={credit_card_value} onChange={handleOnChange} type="text" name="credit_card" id="credit_card" className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.credit_card}</span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Credit Card</label>
         </div>
