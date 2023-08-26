@@ -27,6 +27,7 @@ const Form = ({ handleClickHide }) => {
     const last_name_value = useRef(null);
     const mobile_number_value = useRef(null);
     const birthdate_value = useRef(null);
+    const credit_card_value = useRef(null);
  
   useEffect(() => {
     // console.log(Object.keys(formErrors).length)
@@ -70,25 +71,30 @@ const Form = ({ handleClickHide }) => {
   const validate = (formInputs) => {
     const errors = {}
     if(formInputs.email === ''){
-      errors.email = "Email is required!"
+        errors.email = "Email is required!"
+    }  else {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; 
+      if (!emailRegex.test(formInputs.email)) {
+          errors.email = "Invalid email Address!";
+      }
     }
 
-  if(formInputs.password === ''){
+    if(formInputs.password === ''){
     errors.password = "Password is required!"
-  }
+    }
 
-  if(formInputs.first_name === ''){
+    if(formInputs.first_name === ''){
     errors.first_name  = "First Name is required!"
-  }
+    }
 
-  if(formInputs.last_name === ''){
+    if(formInputs.last_name === ''){
     errors.last_name  = "Last name is required!"
-  }
+    }
 
-  if (formInputs.mobile_number === '') {
+    if (formInputs.mobile_number === '') {
     errors.mobile_number = "Mobile is required!";
-  } else {
-  // Assuming a 10-digit mobile number format
+    } else {
+    // Assuming a 10-digit mobile number format
     const mobileRegex = /^[0-9]{10}$/; 
     if (!mobileRegex.test(formInputs.mobile_number)) {
         errors.mobile_number = "Invalid mobile number!";
@@ -106,6 +112,10 @@ const Form = ({ handleClickHide }) => {
       errors.confirm_password = "Password doesn't Match!"
     }
 
+    if(formInputs.credit_card === ''){
+      errors.credit_card  = "Credit Card is required!"
+    }
+
   return errors
 }
 
@@ -113,7 +123,7 @@ const Form = ({ handleClickHide }) => {
     <div className='absolute top-0 left-0 z-50 flex items-center justify-center w-full h-screen bg-slate-700'>
       <form className="w-5/6 p-4 pt-6 mt-4 rounded shadow-xl bg-slate-900" onSubmit={handleSubmit}>
         <div className="relative z-0 w-full mb-6 group">
-            <input ref={email_value} onChange={handleOnChange} type="email" name="email" id="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <input ref={email_value} onChange={handleOnChange} type="text" name="email" id="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
             <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.email}</span>
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
         </div>
@@ -150,6 +160,11 @@ const Form = ({ handleClickHide }) => {
               <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.birthdate}</span>
               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
           </div>
+          <div className="relative z-0 w-full mb-6 group">
+            <input ref={credit_card_value} onChange={handleOnChange} type="text" name="credit_card" id="credit_card" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+            <span className="absolute text-red-400 text-[0.65rem] font-semibold mt-1">{formErrors.credit_card}</span>
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Credit Card</label>
+        </div>
         </div>
         <div className="flex gap-2">
         <button type='submit' className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">Create Account</button>
