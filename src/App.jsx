@@ -1,16 +1,10 @@
 import "./App.css";
-import ProfilePicture from "./components/ProfilePicture";
-import UserFile from "./components/UserFile";
-import Footer from "./components/Footer";
-
-import NavBar from "./components/NavBar";
+import Form from "./components/Form";
 
 function App() {
   return (
     <div>
-      <NavBar />
-      <UserFile />
-      <Footer />
+      <Form />
     </div>
   );
 }
